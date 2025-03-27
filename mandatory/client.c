@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 19:48:15 by oait-si-          #+#    #+#             */
-/*   Updated: 2025/03/27 00:10:20 by oait-si-         ###   ########.fr       */
+/*   Created: 2025/03/27 08:30:39 by oait-si-          #+#    #+#             */
+/*   Updated: 2025/03/27 08:31:00 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "minitalk.h"
+#include "minitalk.h"
 #include <signal.h>
 #include <stdio.h>
 #include <unistd.h>

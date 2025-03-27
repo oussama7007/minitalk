@@ -1,5 +1,3 @@
-NAME = minitalk
-
 CLIENT = client
 SERVER = server
 
@@ -7,35 +5,44 @@ CC = cc
 
 INCLUDES = -I includes
 
-Cflags = -Wall -Werror -Wextra 
+CFLAGS = -Wall -Werror -Wextra 
 
-SRC = mandatory/client.c \
-	  mandatory/server.c
+SRC_CLIENT = mandatory/client.c
+SRC_SERVER = mandatory/server.c
 
-OBJS = $(SRC:.c=.o)
+OBJ_CLIENT = $(SRC_CLIENT:.c=.o)
+OBJ_SERVER = $(SRC_SERVER:.c=.o)
 
 LIBFT = libft/libft.a
 
-all = $(NAME)
+# Correct target format
+all: $(CLIENT) $(SERVER)
 
-$(LIBFT) : 
+# Ensure Libft is compiled before client/server
+$(LIBFT): 
 	make -C libft
 
-$(NAME) : $(OBJS)
-	$(CC) $(Cflags) $(INCLUDES) $(OBJS) $(LIBS) -o $(NAME)
+# Compile client
+$(CLIENT): $(OBJ_CLIENT) $(LIBFT)
+	$(CC) $(CFLAGS) $(INCLUDES) $(OBJ_CLIENT) $(LIBFT) -o $(CLIENT)
 
-%.o : %.c includes/minitalk.h libft/libft.h
-	$(CC) $(Cflags) $(INCLUDES) -c $< -o $@
+# Compile server
+$(SERVER): $(OBJ_SERVER) $(LIBFT)
+	$(CC) $(CFLAGS) $(INCLUDES) $(OBJ_SERVER) $(LIBFT) -o $(SERVER)
 
-clean :
-	rm -rf $(OBJS)
+# Rule to compile .o files
+%.o: %.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+# Cleanup
+clean:
+	rm -rf $(OBJ_CLIENT) $(OBJ_SERVER)
 	make clean -C libft
 
-fclean : clean
-	rm -rf $(NAME)
+fclean: clean
+	rm -rf $(CLIENT) $(SERVER)
 	make fclean -C libft
 
 re: fclean all
 
-.PHONY: clean
-
+.PHONY: all clean fclean re
