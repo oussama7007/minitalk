@@ -6,12 +6,11 @@
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 08:31:18 by oait-si-          #+#    #+#             */
-/*   Updated: 2025/03/28 23:13:46 by oait-si-         ###   ########.fr       */
+/*   Updated: 2025/03/29 00:15:08 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-#include <stdio.h>
 
 void	sig_handler(int signal, siginfo_t *sa, void *context)
 {
@@ -22,7 +21,6 @@ void	sig_handler(int signal, siginfo_t *sa, void *context)
 	(void)context;
 	if (sa->si_pid != pid)
 	{
-		// printf("new client ================== %d : %d\n", sa->si_pid, pid);
 		pid = sa->si_pid;
 		octet = 0;
 		bit = 7;
